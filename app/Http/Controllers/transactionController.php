@@ -15,59 +15,59 @@ class transactionController extends Controller
         $authkey = env('Auth_key');
         if($request->header('Authorization','default') == $authkey){
 
-try{
-    $count = count($request->all());
-
-    foreach($request->all() as $item){
+            $count = count($request->all());
+            $res = [];
+            foreach($request->all() as $item){
+        try{
         $table = $item['table'];
         $data = $item['data'];
         $conditions = $item['conditions'];
         $conditionsArray = [];
         $insertPayload = [];
+        if($item['autoUpdate'] =='true'){
         foreach ($conditions as $condition) {
             $conditionsArray[$condition['column']] = $condition['value'];
         }
         
-
-
+        
+        
         
         foreach ($data as $item) {
             $insertPayload[$item['column']]=$item['value'];
         }
-        // for($i = 0; $i <= $count;$i++){
-
-        // if($item[$i]["autoUpdate"] == "true"){
 
             $results = DB::connection('aceHODB')->table($table)->updateOrInsert($conditionsArray,$insertPayload);
-    //         return "true";
-    //     }
-    //     else{
-    //         DB::connection('aceHODB')->table($table)->insert($insertPayload);
-    //         return "false";
-        
-    //     }
-    // }
-      
-          
+        }
+        else{
+            foreach ($conditions as $condition) {
+                $conditionsArray[$condition['column']] = $condition['value'];
+            }
+            
+            
+            
+            
+            foreach ($data as $item) {
+                $insertPayload[$item['column']]=$item['value'];
+            }
+            DB::connection('aceHODB')->table($table)->insert($insertPayload);
+        }
+        $res[] = ['StatusCode'=>'200',
+                    'Message'=>'Success',
+                    'Data'=>$insertPayload];
 
-        $insertPayload = [];
+         $insertPayload = [];
     }
 
-}
-catch(\Illuminate\Database\QueryException $exception){
-    return response()->json([
-        'StatusCode'=>'500',
-        'Message'=>'Failed',
-        'error'=>$exception->getMessage(),
-        'Data'=> $request->all()
-    ],500);
+    catch(\Illuminate\Database\QueryException $exception){
+        $res[] = ['StatusCode'=>'500',
+                    'Message'=>'Failed',
+                    'Error'=>$exception->getMessage(),
+                    'Data'=>$insertPayload];
+    }
 }
 
-return response()->json([
-    'StatusCode'=>'200',
-    'Message'=>'Success',
-    'Data'=> $request->all()
-],200);
+return response()->json(
+    $res,200);
 }
 else{
     return response()->json([
@@ -81,11 +81,14 @@ else{
     public function sendtoSiteDB(Request $request){
         $authkey = env('Auth_key');
         if($request->header('Authorization','default') == $authkey){
-        try{
+            $res = [];
             foreach($request->all() as $item){
+                try{
                 $table = $item['table'];
                 $data = $item['data'];
                 $conditions = $item['conditions'];
+                if($item['autoUpdate']=='true')
+                {
                 foreach ($conditions as $condition) {
                     $conditionsArray[$condition['column']] = $condition['value'];
                 }
@@ -97,24 +100,35 @@ else{
                 
                 }
                 $results = DB::table($table)->updateOrInsert($conditionsArray,$insertPayload);
+            }
+            else{
+                foreach ($conditions as $condition) {
+                    $conditionsArray[$condition['column']] = $condition['value'];
+                }
                 
-                            
+              
+                foreach($data as $items){
+
+                    $insertPayload[$items['column']] = $items['value'];
+                
+                }
+                DB::table($table)->insert($insertPayload);
+            }
+                $res[]=['StatusCode'=>'200',
+                'Message'=>'Success',
+                'Data'=> $insertPayload];
                 $insertPayload = [];
             }
-        }
-        catch(\Illuminate\Database\QueryException $exception){
-            return response()->json([
-                'StatusCode'=>'500',
-                'Message'=>'Failed',
-                'error'=>$exception->getMessage(),
-                'Data'=> $request->all()
-            ],500);
+            catch(\Illuminate\Database\QueryException $exception){
+               
+                    $res[] = ['StatusCode'=>'500',
+                    'Message'=>'Failed',
+                    'error'=>$exception->getMessage(),
+                    'Data'=> $insertPayload];
+             
+            }
     }
-    return response()->json([
-        'StatusCode'=>'200',
-        'Message'=>'Success',
-        'Data'=> $request->all()
-    ],200);
+    return response()->json($res,200);
 }
 else{
     return response()->json([
