@@ -53,7 +53,7 @@ class transactionController extends Controller
         }
         $res[] = ['StatusCode'=>'200',
                     'Message'=>'Success',
-                    'Data'=>$insertPayload];
+                    'Data'=> $conditions];
 
          $insertPayload = [];
     }
@@ -62,7 +62,7 @@ class transactionController extends Controller
         $res[] = ['StatusCode'=>'500',
                     'Message'=>'Failed',
                     'Error'=>$exception->getMessage(),
-                    'Data'=>$insertPayload];
+                    'Data'=> $conditions];
     }
 }
 
@@ -116,7 +116,7 @@ else{
             }
                 $res[]=['StatusCode'=>'200',
                 'Message'=>'Success',
-                'Data'=> $insertPayload];
+                'Data'=>  $conditions];
                 $insertPayload = [];
             }
             catch(\Illuminate\Database\QueryException $exception){
@@ -124,7 +124,7 @@ else{
                     $res[] = ['StatusCode'=>'500',
                     'Message'=>'Failed',
                     'error'=>$exception->getMessage(),
-                    'Data'=> $insertPayload];
+                    'Data'=>  $conditions];
              
             }
     }
