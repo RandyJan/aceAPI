@@ -24,7 +24,7 @@ class transactionController extends Controller
         $conditions = $item['conditions'];
         $conditionsArray = [];
         $insertPayload = [];
-        if($item['autoUpdate'] =='true'){
+        if($item['auto_update'] =='true'){
         foreach ($conditions as $condition) {
             $conditionsArray[$condition['column']] = $condition['value'];
         }
@@ -87,7 +87,7 @@ else{
                 $table = $item['table'];
                 $data = $item['data'];
                 $conditions = $item['conditions'];
-                if($item['autoUpdate']=='true')
+                if($item['auto_update']=='true')
                 {
                 foreach ($conditions as $condition) {
                     $conditionsArray[$condition['column']] = $condition['value'];
