@@ -12,8 +12,11 @@ class transactionController extends Controller
     //
 
     public function sendToServer(Request $request){
-        $authkey = env('Auth_key');
-        if($request->header('Authorization','default') == $authkey){
+        $username = env('USER_NAME');
+        $password = env('PASSWORD');
+        $authHeader = 'Basic ' . base64_encode($username . ':' . $password); 
+        
+        if($request->header('Authorization','default') == $authHeader){
 
             $count = count($request->all());
             $res = [];
@@ -79,8 +82,11 @@ else{
     }
 
     public function sendtoSiteDB(Request $request){
-        $authkey = env('Auth_key');
-        if($request->header('Authorization','default') == $authkey){
+        $username = env('USER_NAME');
+        $password = env('PASSWORD');
+        $authHeader = 'Basic ' . base64_encode($username . ':' . $password); 
+        
+        if($request->header('Authorization','default') == $authHeader){
             $res = [];
             foreach($request->all() as $item){
                 try{
