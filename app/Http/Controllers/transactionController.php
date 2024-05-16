@@ -178,23 +178,28 @@ public function syncTable($date,$time,Request $request){
                     'message'=>'success',
                     'data'=>$retrieved
                 ];
+                break;
             case 'PLU':
                 $response = DB::connection('aceHODB')->table('PLU')->where('PLUBARCODE',$item['COLUMN1'])
                 ->get();
+                Log::info($response);
                 if($response->isEmpty()){
                     break;
                 }
                 $retrieved=[]; 
-                foreach($response[0] as $key => $value){
+                foreach($response as $row){
+                foreach($row as $key => $value){
                     $retrieved[]=["column"=>$key,
                         "value"=>$value];
                    }
+                }
                 $res[]=[
                     'statusCode'=>200,
                     'table'=>'PLU',
                     'message'=>'success',
                     'data'=>$retrieved
                 ];
+                break;
             case 'PARTS':
                 $response = DB::connection('aceHODB')->table('PARTS')->where('PRODUCT_ID',$item['COLUMN1'])->get();
                 $retrieved=[]; 
@@ -214,11 +219,12 @@ public function syncTable($date,$time,Request $request){
                     'message'=>'success',
                     'data'=>$retrieved
                 ];
+                break;
                 case 'POSTMIX':
                     $response = DB::connection('aceHODB')->table('POSTMIX')->where('PRODUCT_ID', $item['COLUMN1'])
                     ->where('PARTSID',$item['COLUMN2'])
                     ->get();
-                    Log::info($response);
+                    // Log::info($response);
                     $retrieved = [];
                     // if(($response == null)){ 
                         if($response ==="[]" || Empty($response) || $response->isEmpty()){
@@ -239,9 +245,11 @@ public function syncTable($date,$time,Request $request){
                         'message'=>'success',
                         'data'=>$retrieved
                     ];
+                    break;
                 // }
-            // default:
+            default:
             // return;
+            // break;
                 // $res[]=[
                 //     'statusCode'=>404,
                 //     'message'=>'unknown data',
