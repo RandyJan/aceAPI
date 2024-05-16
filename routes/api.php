@@ -20,4 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::post('/syncServer',[transactionController::class, 'sendToServer']);
 Route::post('/syncSiteDB',[transactionController::class, 'sendToSiteDB']);
+Route::get('/syncTable/{date}/{time}',[transactionController::class, 'syncTable']);
 
