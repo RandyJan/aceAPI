@@ -155,7 +155,7 @@ public function syncTable($date,$time){
             try{
         switch ($item['TABLENAME']) {
             case 'PARTSLOCATION':
-                $response = DB::table('PartsLocation')->where('BRANCHID',$item['COLUMN1'])
+                $response = DB::connection('aceHODB')->table('PartsLocation')->where('BRANCHID',$item['COLUMN1'])
                 ->where('PRODUCT_ID',$item['COLUMN2'])
                 ->get();
             //   Log::info($response);
@@ -174,7 +174,7 @@ public function syncTable($date,$time){
                     'data'=>$retrieved
                 ];
             case 'PLU':
-                $response = DB::table('PLU')->where('PLUBARCODE',$item['COLUMN1'])
+                $response = DB::connection('aceHODB')->table('PLU')->where('PLUBARCODE',$item['COLUMN1'])
                 ->get();
                 if($response->isEmpty()){
                     break;
@@ -191,7 +191,7 @@ public function syncTable($date,$time){
                     'data'=>$retrieved
                 ];
             case 'PARTS':
-                $response = DB::table('PARTS')->where('PRODUCT_ID',$item['COLUMN1'])->get();
+                $response = DB::connection('aceHODB')->table('PARTS')->where('PRODUCT_ID',$item['COLUMN1'])->get();
                 $retrieved=[]; 
                 if($response->isEmpty()){
                     break;
@@ -210,7 +210,7 @@ public function syncTable($date,$time){
                     'data'=>$retrieved
                 ];
                 case 'POSTMIX':
-                    $response = DB::table('POSTMIX')->where('PRODUCT_ID', $item['COLUMN1'])
+                    $response = DB::connection('aceHODB')->table('POSTMIX')->where('PRODUCT_ID', $item['COLUMN1'])
                     ->where('PARTSID',$item['COLUMN2'])
                     ->get();
                     Log::info($response);
