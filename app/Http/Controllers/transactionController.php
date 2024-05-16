@@ -146,7 +146,12 @@ else{
     ],401);
 }
 }
-public function syncTable($date,$time){
+public function syncTable($date,$time,Request $request){
+    $username = env('USER_NAME');
+    $password = env('PASSWORD');
+    $authHeader = 'Basic ' . base64_encode($username . ':' . $password); 
+    
+    if($request->header('Authorization','default') == $authHeader){
         $data = syncTable::where('date','>=',$date)
         ->where('time','>=',$time)
         ->get();
@@ -254,5 +259,13 @@ public function syncTable($date,$time){
     }
 
         return $res;
+}
+        else{
+            return response()->json([
+                'StatusCode'=>'401',
+                'Message'=>'Unauthorized',
+                
+            ],401);
+        }
 }
 }
