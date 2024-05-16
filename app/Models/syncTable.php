@@ -9,6 +9,6 @@ class syncTable extends Model
 {
     use HasFactory;
     protected $table = 'SyncTable';
-    
+    protected $connection = 'aceHODB';
 
 }
