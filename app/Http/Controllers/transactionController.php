@@ -236,12 +236,12 @@ public function syncTable($date,$time){
                     ];
                 // }
             default:
-            
-                $res[]=[
-                    'statusCode'=>404,
-                    'message'=>'unknown data',
-                    'table'=>$item['TABLENAME'],
-                    'data'=>$item];
+            return;
+                // $res[]=[
+                //     'statusCode'=>404,
+                //     'message'=>'unknown data',
+                //     'table'=>$item['TABLENAME'],
+                //     'data'=>$item];
         }
     }
     catch(\Illuminate\Database\QueryException $exception){
