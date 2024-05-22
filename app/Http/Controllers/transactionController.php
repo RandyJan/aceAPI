@@ -158,8 +158,8 @@ public function syncTable($date,$time,Request $request){
         $res=[];
         foreach($data as $item){
             try{
-        switch ($item['TABLENAME']) {
-case 'PARTSLOCATION':
+        switch (strtolower($item['TABLENAME'])) {
+case 'partslocation':
     $response = DB::connection('aceHODB')->table('PartsLocation')->where('BRANCHID',$item['COLUMN1'])
     ->where('PRODUCT_ID',$item['COLUMN2'])
     ->get();
@@ -179,7 +179,7 @@ if($response->isEmpty()){
         'data'=>$retrieved
     ];
     break;
-case 'PLU':
+case 'plu':
     $response = DB::connection('aceHODB')->table('PLU')->where('PLUBARCODE',$item['COLUMN1'])
     ->get();
     Log::info($response);
@@ -200,7 +200,7 @@ case 'PLU':
         'data'=>$retrieved
     ];
     break;
-case 'PARTS':
+case 'parts':
     $response = DB::connection('aceHODB')->table('PARTS')->where('PRODUCT_ID',$item['COLUMN1'])->get();
     $retrieved=[]; 
     if($response->isEmpty()){
@@ -220,7 +220,7 @@ case 'PARTS':
         'data'=>$retrieved
     ];
     break;
-    case 'POSTMIX':
+    case 'postmix':
         $response = DB::connection('aceHODB')->table('POSTMIX')->where('PRODUCT_ID', $item['COLUMN1'])
         ->where('PARTSID',$item['COLUMN2'])
         ->get();
@@ -246,8 +246,8 @@ case 'PARTS':
             'data'=>$retrieved
         ];
         break;
-        case 'AdjustmenRate':
-            $response = DB::connection('aceHODB')->table('AdjustmenRate')->where('ID', $item['COLUMN1'])
+        case 'adjustmentrate':
+            $response = DB::connection('aceHODB')->table('ADJUSTMENTRATE')->where('ID', $item['COLUMN1'])
             ->get();
         
             $retrieved = [];
@@ -266,12 +266,12 @@ case 'PARTS':
 
 $res[]=[
     'statusCode'=>200,
-    'table'=>'AdjustmenRate',
+    'table'=>'ADJUSTMENTRATE',
     'message'=>'success',
     'data'=>$retrieved
 ];
 break;
-case 'AdjustmentRateDtls':
+case 'adjustmentratedtls':
     $response = DB::connection('aceHODB')->table('AdjustmentRateDtls')->where('ADJID', $item['COLUMN1'])
     ->where('PRODUCTID', $item['COLUMN2'])
     ->get();
@@ -297,7 +297,7 @@ case 'AdjustmentRateDtls':
         'data'=>$retrieved
     ];
     break;
-    case 'AdmissionType':
+    case 'admissiontype':
         $response = DB::connection('aceHODB')->table('AdmissionType')->where('ADMISSIONTYPEID', $item['COLUMN1'])
         ->get();
     
@@ -322,7 +322,7 @@ case 'AdjustmentRateDtls':
             'data'=>$retrieved
         ];
         break;
-        case 'AGTS':
+        case 'agts':
             $response = DB::connection('aceHODB')->table('AGTS')
             ->where('BRANCHID', $item['COLUMN1'])
             ->where('POSID', $item['COLUMN2'])
@@ -353,7 +353,7 @@ case 'AdjustmentRateDtls':
                 'data'=>$retrieved
             ];
             break;
-            case 'AssetsDetails':
+            case 'assetsdetails':
                 $response = DB::connection('aceHODB')->table('AssetsDetails')->where('ASSETID', $item['COLUMN1'])
                 ->get();
             
@@ -378,7 +378,7 @@ case 'AdjustmentRateDtls':
                     'data'=>$retrieved
                 ];
                 break;
-                case 'ATC':
+                case 'atc':
                     $response = DB::connection('aceHODB')
                     ->table('ATC')
                     ->where('ID', $item['COLUMN1'])
@@ -405,7 +405,7 @@ case 'AdjustmentRateDtls':
                         'data'=>$retrieved
                     ];
                     break;
-                    case 'AthleteCustomers':
+                    case 'athletecustomers':
                         $response = DB::connection('aceHODB')
                         ->table('AthleteCustomers')
                         ->where('BRANCHID', $item['COLUMN1'])
@@ -435,7 +435,7 @@ case 'AdjustmentRateDtls':
                             'data'=>$retrieved
                         ];
                         break;
-            case 'BOPromo':
+            case 'bopromo':
                 $response = DB::connection('aceHODB')
                 ->table('BOPromo')
                 ->where('BOPROMOID', $item['COLUMN1'])
@@ -462,7 +462,7 @@ case 'AdjustmentRateDtls':
                     'data'=>$retrieved
                 ];
                 break;
-                case 'Branches':
+                case 'branches':
                     $response = DB::connection('aceHODB')
                     ->table('Branches')
                     ->where('BRANCHID', $item['COLUMN1'])
@@ -489,7 +489,7 @@ case 'AdjustmentRateDtls':
                         'data'=>$retrieved
                     ];
                     break;
-                    case 'BusUnit':
+                    case 'busunit':
                         $response = DB::connection('aceHODB')
                         ->table('BusUnit')
                         ->where('BSUNITCODE', $item['COLUMN1'])
@@ -516,7 +516,7 @@ case 'AdjustmentRateDtls':
                             'data'=>$retrieved
                         ];
                         break;
-        case 'CATEGORYCODE':
+        case 'categorycode':
             $response = DB::connection('aceHODB')
             ->table('CATEGORYCODE')
             ->where('CATEGORYCODE', $item['COLUMN1'])
@@ -543,7 +543,7 @@ case 'AdjustmentRateDtls':
                 'data'=>$retrieved
             ];
             break;
-            case 'ChequeDetails':
+            case 'chequedetails':
                 $response = DB::connection('aceHODB')
                 ->table('ChequeDetails')
                 ->where('ID', $item['COLUMN1'])
@@ -571,7 +571,7 @@ case 'AdjustmentRateDtls':
                     'data'=>$retrieved
                 ];
                 break;
-                case 'ClaimPromo':
+                case 'claimpromo':
                     $response = DB::connection('aceHODB')
                     ->table('ClaimPromo')
                     ->where('BRANCHID', $item['COLUMN1'])
@@ -599,7 +599,7 @@ case 'AdjustmentRateDtls':
                         'data'=>$retrieved
                     ];
                     break;
-                    case 'Company':
+                    case 'company':
                         $response = DB::connection('aceHODB')
                         ->table('Company')
                         ->where('COMPANYID', $item['COLUMN1'])
@@ -626,7 +626,7 @@ case 'AdjustmentRateDtls':
                             'data'=>$retrieved
                         ];
                         break;
-                        case 'Currencies':
+                        case 'currencies':
                             $response = DB::connection('aceHODB')
                             ->table('Currencies')
                             ->where('ID', $item['COLUMN1'])
@@ -653,7 +653,7 @@ case 'AdjustmentRateDtls':
                                 'data'=>$retrieved
                             ];
                             break;
-                            case 'CurrencyDenomination':
+                            case 'currencydenomination':
                                 $response = DB::connection('aceHODB')
                                 ->table('CurrencyDenomination')
                                 ->where('ID', $item['COLUMN1'])
@@ -680,7 +680,7 @@ case 'AdjustmentRateDtls':
                                     'data'=>$retrieved
                                 ];
                                 break;
-                                case 'CurrencyExchangeRate':
+                                case 'currencyexchangerate':
                                     $response = DB::connection('aceHODB')
                                     ->table('CurrencyExchangeRate')
                                     ->where('ID', $item['COLUMN1'])
@@ -707,7 +707,7 @@ case 'AdjustmentRateDtls':
             'data'=>$retrieved
         ];
         break;
-    case 'CustomerLoyaltyCards':
+    case 'customerloyaltycards':
         $response = DB::connection('aceHODB')
         ->table('CustomerLoyaltyCards')
         ->where('LOYALTYCARDID', $item['COLUMN1'])
@@ -735,7 +735,7 @@ case 'AdjustmentRateDtls':
         ];
         break;      
 
-        case 'Customers':
+        case 'customers':
             $response = DB::connection('aceHODB')
             ->table('Customers')
             ->where('BRANCHID', $item['COLUMN1'])
@@ -763,7 +763,7 @@ case 'AdjustmentRateDtls':
                 'data'=>$retrieved
             ];
             break;             
-            case 'CustomersBank':
+            case 'customersbank':
                 $response = DB::connection('aceHODB')
                 ->table('CustomersBank')
                 ->where('CBANKID', $item['COLUMN1'])
@@ -790,7 +790,7 @@ case 'AdjustmentRateDtls':
                     'data'=>$retrieved
                 ];
                 break; 
-                case 'Custprice':
+                case 'custprice':
                     $response = DB::connection('aceHODB')
                     ->table('Custprice')
                     ->where('CUSTPRICEID', $item['COLUMN1'])
@@ -817,7 +817,7 @@ case 'AdjustmentRateDtls':
                         'data'=>$retrieved
                     ];
                     break; 
-                    case 'CustpriceHistory':
+                    case 'custpricehistory':
                         $response = DB::connection('aceHODB')
                         ->table('CustpriceHistory')
                         ->where('CUSTPRICEHISTORYID', $item['COLUMN1'])
@@ -844,7 +844,7 @@ case 'AdjustmentRateDtls':
                             'data'=>$retrieved
                         ];
                         break; 
-                        case 'DeptSumm':
+                        case 'deptsumm':
                             $response = DB::connection('aceHODB')
                             ->table('DeptSumm')
                             ->where('BRANCHID', $item['COLUMN1'])
@@ -872,7 +872,7 @@ case 'AdjustmentRateDtls':
                                 'data'=>$retrieved
                             ];
                             break;   
-                            case 'DeviceList':
+                            case 'devicelist':
                                 $response = DB::connection('aceHODB')
                                 ->table('DeviceList')
                                 ->where('DEVICELISTID', $item['COLUMN1'])
@@ -899,7 +899,7 @@ case 'AdjustmentRateDtls':
                                     'data'=>$retrieved
                                 ];
                                 break;     
-                                case 'DiscTrans':
+                                case 'disctrans':
                                     $response = DB::connection('aceHODB')
                                     ->table('DiscTrans')
                                     ->where('DISCTRANSID', $item['COLUMN1'])
@@ -929,7 +929,7 @@ case 'AdjustmentRateDtls':
                                         'data'=>$retrieved
                                     ];
                                     break;  
-                                    case 'Divisions':
+                                    case 'divisions':
                                         $response = DB::connection('aceHODB')
                                         ->table('Divisions')
                                         ->where('DIVISIONID', $item['COLUMN1'])
@@ -956,7 +956,7 @@ case 'AdjustmentRateDtls':
                                             'data'=>$retrieved
                                         ];
                                         break;
-                                        case 'Employee':
+                                        case 'employee':
                                             $response = DB::connection('aceHODB')
                                             ->table('Employee')
                                             ->where('EMPLOYEEID', $item['COLUMN1'])
@@ -983,7 +983,7 @@ case 'AdjustmentRateDtls':
                                                 'data'=>$retrieved
                                             ];
                                             break;
-            case 'ExemptProducts':
+            case 'exemptproducts':
                 $response = DB::connection('aceHODB')
                 ->table('ExemptProducts')
                 ->where('EXEMPTPRODUCTSID', $item['COLUMN1'])
@@ -1010,7 +1010,7 @@ case 'AdjustmentRateDtls':
                     'data'=>$retrieved
                 ];
                 break;
-                case 'FDefault':
+                case 'fdefault':
                     $response = DB::connection('aceHODB')
                     ->table('FDefault')
                     ->where('MYDEFAULT', $item['COLUMN1'])
@@ -1064,7 +1064,7 @@ case 'AdjustmentRateDtls':
                             'data'=>$retrieved
                         ];
                         break;
-                        case 'Holidays':
+                        case 'holidays':
                             $response = DB::connection('aceHODB')
                             ->table('Holidays')
                             ->where('DATE', $item['COLUMN1'])
@@ -1091,7 +1091,7 @@ case 'AdjustmentRateDtls':
                                 'data'=>$retrieved
                             ];
                             break;
-                            case 'HOSiteTerminals':
+                            case 'hositeterminals':
                                 $response = DB::connection('aceHODB')
                                 ->table('HOSiteTerminals')
                                 ->where('ID', $item['COLUMN1'])
@@ -1118,7 +1118,7 @@ case 'AdjustmentRateDtls':
                                     'data'=>$retrieved
                                 ];
                                 break;
-                                case 'HPromo':
+                                case 'hpromo':
                                     $response = DB::connection('aceHODB')
                                     ->table('HPromo')
                                     ->where('PROMOID', $item['COLUMN1'])
@@ -1145,7 +1145,7 @@ case 'AdjustmentRateDtls':
                                         'data'=>$retrieved
                                     ];
                                     break;
-                                    case 'InParkCurrencies':
+                                    case 'inparkcurrencies':
                                         $response = DB::connection('aceHODB')
                                         ->table('InParkCurrencies')
                                         ->where('BRANCHID', $item['COLUMN1'])
@@ -1173,7 +1173,7 @@ case 'AdjustmentRateDtls':
                                             'data'=>$retrieved
                                         ];
                                         break;
-                                        case 'InParkCurrencyDetails':
+                                        case 'inparkcurrencydetails':
                                             $response = DB::connection('aceHODB')
                                             ->table('InParkCurrencyDetails')
                                             ->where('BRANCHID', $item['COLUMN1'])
@@ -1201,7 +1201,7 @@ case 'AdjustmentRateDtls':
                                                 'data'=>$retrieved
                                             ];
             break;
-            case 'LocSettings':
+            case 'locsettings':
                 $response = DB::connection('aceHODB')
                 ->table('LocSettings')
                 ->where('ID', $item['COLUMN1'])
@@ -1228,7 +1228,7 @@ case 'AdjustmentRateDtls':
                     'data'=>$retrieved
                 ];
                 break;
-                case 'LoyaltySettings':
+                case 'loyaltysettings':
                     $response = DB::connection('aceHODB')
                     ->table('LoyaltySettings')
                     ->where('ID', $item['COLUMN1'])
@@ -1255,7 +1255,7 @@ case 'AdjustmentRateDtls':
                         'data'=>$retrieved
                     ];
                     break;
-                    case 'LoyaltyTrans':
+                    case 'loyaltytrans':
                         $response = DB::connection('aceHODB')
                         ->table('LoyaltyTrans')
                         ->where('CUSTOMERID', $item['COLUMN1'])
@@ -1282,7 +1282,7 @@ case 'AdjustmentRateDtls':
                             'message'=>'success',
                             'data'=>$retrieved
                         ];
-                        break; case 'ManualOS':
+                        break; case 'manualos':
                             $response = DB::connection('aceHODB')
                             ->table('ManualOS')
                             ->where('BRANCHID', $item['COLUMN1'])
@@ -1311,7 +1311,7 @@ case 'AdjustmentRateDtls':
                                 'data'=>$retrieved
                             ];
                             break;
-                            case 'Master':
+                            case 'master':
                                 $response = DB::connection('aceHODB')
                                 ->table('Master')
                                 ->where('MASTERCODE', $item['COLUMN1'])
@@ -1338,7 +1338,7 @@ case 'AdjustmentRateDtls':
                                     'data'=>$retrieved
                                 ];
                                 break;
-                                case 'MealStubComponents':
+                                case 'mealstubcomponents':
                                     $response = DB::connection('aceHODB')
                                     ->table('MealStubComponents')
                                     ->where('REFERENCEID', $item['COLUMN1'])
@@ -1366,34 +1366,34 @@ case 'AdjustmentRateDtls':
                                         'data'=>$retrieved
                                     ];
                                     break;
-                                    case 'OrderSLipDetails':
-                                        $response = DB::connection('aceHODB')
-                                        ->table('OrderSLipDetails')
-                                        ->where('ID', $item['COLUMN1'])
-                                        ->get();
+                                    // case 'OrderSLipDetails':
+                                    //     $response = DB::connection('aceHODB')
+                                    //     ->table('OrderSLipDetails')
+                                    //     ->where('ID', $item['COLUMN1'])
+                                    //     ->get();
                                     
-                                        $retrieved = [];
+                                    //     $retrieved = [];
                                     
-                                            if($response ==="[]" || Empty($response) || $response->isEmpty()){
-                                                break;
-                                            }
-                                            foreach($response as $row){
-                                        foreach($row as $key => $value){
-                                            $retrieved[]=[
-                                                'column'=>$key,
-                                                'value'=>$value
-                                            ];
-                                        }
-                                    }
+                                    //         if($response ==="[]" || Empty($response) || $response->isEmpty()){
+                                    //             break;
+                                    //         }
+                                    //         foreach($response as $row){
+                                    //     foreach($row as $key => $value){
+                                    //         $retrieved[]=[
+                                    //             'column'=>$key,
+                                    //             'value'=>$value
+                                    //         ];
+                                    //     }
+                                    // }
                     
-                                        $res[]=[
-                                            'statusCode'=>200,
-                                            'table'=>'OrderSLipDetails',
-                                            'message'=>'success',
-                                            'data'=>$retrieved
-                                        ];
-                                        break;
-                                        case 'OrderSlipHeader':
+                                    //     $res[]=[
+                                    //         'statusCode'=>200,
+                                    //         'table'=>'OrderSLipDetails',
+                                    //         'message'=>'success',
+                                    //         'data'=>$retrieved
+                                    //     ];
+                                    //     break;
+                                        case 'orderslipheader':
                                             $response = DB::connection('aceHODB')
                                             ->table('OrderSlipHeader')
                                             ->where('BRANCHID', $item['COLUMN1'])
@@ -1423,7 +1423,7 @@ case 'AdjustmentRateDtls':
                                                 'data'=>$retrieved
                                             ];
                                             break;
-                                            case 'OutletDailySales':
+                                            case 'outletdailysales':
                                                 $response = DB::connection('aceHODB')
                                                 ->table('OutletDailySales')
                                                 ->where('BRANCHID', $item['COLUMN1'])
@@ -1452,7 +1452,7 @@ case 'AdjustmentRateDtls':
                                                     'data'=>$retrieved
                                                 ];
 break;
-case 'Outlets':
+case 'outlets':
 $response = DB::connection('aceHODB')
 ->table('Outlets')
 ->where('BRANCHID', $item['COLUMN1'])
@@ -1480,7 +1480,7 @@ $res[]=[
 'data'=>$retrieved
 ];
 break;
-case 'OutletType':
+case 'outlettype':
 $response = DB::connection('aceHODB')
 ->table('OutletType')
 ->where('OUTLETTYPE', $item['COLUMN1'])
@@ -1507,7 +1507,7 @@ $res[]=[
 'data'=>$retrieved
 ];
 break;
-case 'ParkingTickets':
+case 'parkingtickets':
 $response = DB::connection('aceHODB')
 ->table('ParkingTickets')
 ->where('ID', $item['COLUMN1'])
@@ -1534,7 +1534,7 @@ $res[]=[
 'data'=>$retrieved
 ];
 break;
-case 'PartSplr':
+case 'partsplr':
 $response = DB::connection('aceHODB')
 ->table('PartSplr')
 ->where('SUPPLIERCODE', $item['COLUMN1'])
@@ -1562,7 +1562,7 @@ $res[]=[
 'data'=>$retrieved
 ];
 break;
-case 'PartsRequestHeader':
+case 'partsrequestheader':
 $response = DB::connection('aceHODB')
 ->table('PartsRequestHeader')
 ->where('BRANCHID', $item['COLUMN1'])
@@ -1590,7 +1590,7 @@ $res[]=[
 'data'=>$retrieved
 ];
 break;
-case 'PosAssign':
+case 'posassign':
 $response = DB::connection('aceHODB')
 ->table('PosAssign')
 ->where('POSNO', $item['COLUMN1'])
@@ -1618,7 +1618,7 @@ $res[]=[
     'data'=>$retrieved
 ];
 break;
-case 'POSHeaders':
+case 'posheaders':
     $response = DB::connection('aceHODB')
     ->table('POSHeaders')
     ->where('BRANCHID', $item['COLUMN1'])
@@ -1648,7 +1648,7 @@ case 'POSHeaders':
         'data'=>$retrieved
     ];
     break;
-    case 'PPCTrans':
+    case 'ppctrans':
         $response = DB::connection('aceHODB')
         ->table('PPCTrans')
         ->where('BRANCHID', $item['COLUMN1'])
@@ -1676,7 +1676,7 @@ case 'POSHeaders':
             'data'=>$retrieved
         ];
         break;
-        case 'PrepaidCards':
+        case 'prepaidcards':
             $response = DB::connection('aceHODB')
             ->table('PrepaidCards')
             ->where('ID', $item['COLUMN1'])
@@ -1703,37 +1703,37 @@ case 'POSHeaders':
                 'data'=>$retrieved
             ];
             break;
-            case 'PromoCustomers':
-                $response = DB::connection('aceHODB')
-                ->table('PromoCustomers')
-                ->where('BRANCHID', $item['COLUMN1'])
-                ->where('OUTLETID', $item['COLUMN2'])
-                ->where('POSNO', $item['COLUMN3'])
-                ->where('DATE', $item['COLUMN4'])
-                ->get();
+            // case 'PromoCustomers':
+            //     $response = DB::connection('aceHODB')
+            //     ->table('PromoCustomers')
+            //     ->where('BRANCHID', $item['COLUMN1'])
+            //     ->where('OUTLETID', $item['COLUMN2'])
+            //     ->where('POSNO', $item['COLUMN3'])
+            //     ->where('DATE', $item['COLUMN4'])
+            //     ->get();
             
-                $retrieved = [];
+            //     $retrieved = [];
             
-                    if($response ==="[]" || Empty($response) || $response->isEmpty()){
-                        break;
-                    }
-                    foreach($response as $row){
-                foreach($row as $key => $value){
-                    $retrieved[]=[
-                        'column'=>$key,
-                        'value'=>$value
-                    ];
-                }
-            }
+            //         if($response ==="[]" || Empty($response) || $response->isEmpty()){
+            //             break;
+            //         }
+            //         foreach($response as $row){
+            //     foreach($row as $key => $value){
+            //         $retrieved[]=[
+            //             'column'=>$key,
+            //             'value'=>$value
+            //         ];
+            //     }
+            // }
 
-                $res[]=[
-                    'statusCode'=>200,
-                    'table'=>'PromoCustomers',
-                    'message'=>'success',
-                    'data'=>$retrieved
-                ];
-                break;
-                case 'PromoItems':
+            //     $res[]=[
+            //         'statusCode'=>200,
+            //         'table'=>'PromoCustomers',
+            //         'message'=>'success',
+            //         'data'=>$retrieved
+            //     ];
+            //     break;
+                case 'promoitems':
                     $response = DB::connection('aceHODB')
                     ->table('PromoItems')
                     ->where('BRANCHID', $item['COLUMN1'])
@@ -1763,7 +1763,7 @@ case 'POSHeaders':
                         'data'=>$retrieved
                     ];
                     break;
-                    case 'PSetup':
+                    case 'psetup':
                         $response = DB::connection('aceHODB')
                         ->table('PSetup')
                         ->where('DSCCODE', $item['COLUMN1'])
@@ -1790,37 +1790,37 @@ case 'POSHeaders':
                             'data'=>$retrieved
                         ];
                         break;
-                        case 'PTL':
-                            $response = DB::connection('aceHODB')
-                            ->table('PTL')
-                            ->where('BRANCHID', $item['COLUMN1'])
-                            ->where('OUTLETID', $item['COLUMN2'])
-                            ->where('POSNUMBER', $item['COLUMN3'])
-                            ->where('DATE', $item['COLUMN4'])
-                            ->get();
+                        // case 'PTL':
+                        //     $response = DB::connection('aceHODB')
+                        //     ->table('PTL')
+                        //     ->where('BRANCHID', $item['COLUMN1'])
+                        //     ->where('OUTLETID', $item['COLUMN2'])
+                        //     ->where('POSNUMBER', $item['COLUMN3'])
+                        //     ->where('DATE', $item['COLUMN4'])
+                        //     ->get();
                         
-                            $retrieved = [];
+                        //     $retrieved = [];
                         
-                                if($response ==="[]" || Empty($response) || $response->isEmpty()){
-                                    break;
-                                }
-                                foreach($response as $row){
-                            foreach($row as $key => $value){
-                                $retrieved[]=[
-                                    'column'=>$key,
-                                    'value'=>$value
-                                ];
-                            }
-                        }
+                        //         if($response ==="[]" || Empty($response) || $response->isEmpty()){
+                        //             break;
+                        //         }
+                        //         foreach($response as $row){
+                        //     foreach($row as $key => $value){
+                        //         $retrieved[]=[
+                        //             'column'=>$key,
+                        //             'value'=>$value
+                        //         ];
+                        //     }
+                        // }
         
-                            $res[]=[
-                                'statusCode'=>200,
-                                'table'=>'PTL',
-                                'message'=>'success',
-                                'data'=>$retrieved
-                            ];
-                            break;
-                            case 'RedeemOutlets':
+                        //     $res[]=[
+                        //         'statusCode'=>200,
+                        //         'table'=>'PTL',
+                        //         'message'=>'success',
+                        //         'data'=>$retrieved
+                        //     ];
+                        //     break;
+                            case 'redeemoutlets':
                                 $response = DB::connection('aceHODB')
                                 ->table('RedeemOutlets')
                                 ->where('BRANCHID', $item['COLUMN1'])
@@ -1849,7 +1849,7 @@ case 'POSHeaders':
                                     'data'=>$retrieved
                                 ];
                                 break;
-                                case 'SCCustomers':
+                                case 'sccustomers':
                                     $response = DB::connection('aceHODB')
                                     ->table('SCCustomers')
                                     ->where('BRANCHID', $item['COLUMN1'])
@@ -1879,7 +1879,7 @@ case 'POSHeaders':
                                         'data'=>$retrieved
                                     ];
                                     break;
-                                    case 'SiteParts':
+                                    case 'siteparts':
                                         $response = DB::connection('aceHODB')
                                         ->table('SiteParts')
                                         ->where('ARNOC', $item['COLUMN1'])
@@ -1907,7 +1907,7 @@ case 'POSHeaders':
                                             'data'=>$retrieved
                                         ];
                                         break;
-                                        case 'Stockcrd':
+                                        case 'stockcrd':
                                             $response = DB::connection('aceHODB')
                                             ->table('Stockcrd')
                                             ->where('BRANCHID', $item['COLUMN1'])
@@ -1935,7 +1935,7 @@ case 'POSHeaders':
                                                 'data'=>$retrieved
                                             ];
                                     break;
-                                    case 'Subcat':
+                                    case 'subcat':
                                         $response = DB::connection('aceHODB')
                                         ->table('Subcat')
                                         ->where('PRODUCTNO', $item['COLUMN1'])
@@ -1962,7 +1962,7 @@ case 'POSHeaders':
                                             'data'=>$retrieved
                                         ];
                                         break;
-                                        case 'Supplier':
+                                        case 'supplier':
                                             $response = DB::connection('aceHODB')
                                             ->table('Supplier')
                                             ->where('SUPPID', $item['COLUMN1'])
@@ -1989,7 +1989,7 @@ case 'POSHeaders':
                                                 'data'=>$retrieved
                                             ];
                                             break;
-                                            case 'tblProject':
+                                            case 'tblproject':
                                                 $response = DB::connection('aceHODB')
                                                 ->table('tblProject')
                                                 ->where('ID', $item['COLUMN1'])
@@ -2016,7 +2016,7 @@ case 'POSHeaders':
                                                     'data'=>$retrieved
                                                 ];
                                                 break;
-                                                case 'tblReasons':
+                                                case 'tblreasons':
                                                     $response = DB::connection('aceHODB')
                                                     ->table('tblReasons')
                                                     ->where('ID', $item['COLUMN1'])
@@ -2043,7 +2043,7 @@ case 'POSHeaders':
                                                         'data'=>$retrieved
                                                     ];
                                                     break;
-                                                    case 'TenantInventory':
+                                                    case 'tenantinventory':
                                                         $response = DB::connection('aceHODB')
                                                         ->table('TenantInventory')
                                                         ->where('BRANCHID', $item['COLUMN1'])
@@ -2071,7 +2071,7 @@ case 'POSHeaders':
                                                             'data'=>$retrieved
                                                         ];
                                                         break;
-                                                        case 'TicketGrouping':
+                                                        case 'ticketgrouping':
                                                             $response = DB::connection('aceHODB')
                                                             ->table('TicketGrouping')
                                                             ->where('TICKETGROUP', $item['COLUMN1'])
@@ -2098,7 +2098,7 @@ case 'POSHeaders':
                                                                 'data'=>$retrieved
                                                             ];
                                                             break;
-                                                            case 'TicketsTemplate':
+                                                            case 'ticketstemplate':
                                                                 $response = DB::connection('aceHODB')
                                                                 ->table('TicketsTemplate')
                                                                 ->where('TICKETTEMPLATEID', $item['COLUMN1'])
@@ -2126,7 +2126,7 @@ case 'POSHeaders':
                                                                     'data'=>$retrieved
                                                                 ];
                                                                 break;
-                                                                case 'TicketsTemplateHeader':
+                                                                case 'ticketstemplateheader':
                                                                     $response = DB::connection('aceHODB')
                                                                     ->table('TicketsTemplateHeader')
                                                                     ->where('TICKETTEMPLATEID', $item['COLUMN1'])
@@ -2153,7 +2153,7 @@ case 'POSHeaders':
                                                                         'data'=>$retrieved
                                                                     ];
                                                                     break;
-                                                                    case 'TurnoverCurrencyDenomination':
+                                                                    case 'turnovercurrencydenomination':
                                                                         $response = DB::connection('aceHODB')
                                                                         ->table('TurnoverCurrencyDenomination')
                                                                         ->where('STATIONCODE', $item['COLUMN1'])
@@ -2183,7 +2183,7 @@ case 'POSHeaders':
                                                                             'data'=>$retrieved
                                                                         ];
                                                                         break;
-                                                                        case 'UCostChange':
+                                                                        case 'ucostchange':
                                                                             $response = DB::connection('aceHODB')
                                                                             ->table('UCostChange')
                                                                             ->where('SITENO', $item['COLUMN1'])
@@ -2213,7 +2213,7 @@ case 'POSHeaders':
                                                                                 'data'=>$retrieved
                                                                             ];
                                                                             break;
-                                                                            case 'UserDevices':
+                                                                            case 'userdevices':
                                                                                 $response = DB::connection('aceHODB')
                                                                                 ->table('UserDevices')
                                                                                 ->where('ID', $item['COLUMN1'])
@@ -2241,7 +2241,7 @@ case 'POSHeaders':
                                                                                     'data'=>$retrieved
                                                                                 ];
                                                                                 break;
-                                                                                case 'Users':
+                                                                                case 'users':
                                                                                     $response = DB::connection('aceHODB')
                                                                                     ->table('Users')
                                                                                     ->where('DATE', $item['COLUMN1'])
@@ -2269,7 +2269,7 @@ case 'POSHeaders':
                                                                                         'data'=>$retrieved
                                                                                     ];
                                                                                     break;
-                                                                                    case 'UserSite':
+                                                                                    case 'usersite':
                                                                                         $response = DB::connection('aceHODB')
                                                                                         ->table('UserSite')
                                                                                         ->where('ID', $item['COLUMN1'])
@@ -2296,7 +2296,7 @@ case 'POSHeaders':
                                                                                             'data'=>$retrieved
                                                                                         ];
                                                                                         break;
-                                                                                        case 'UserType':
+                                                                                        case 'usertype':
                                                                                             $response = DB::connection('aceHODB')
                                                                                             ->table('UserType')
                                                                                             ->where('USERTYPEID', $item['COLUMN1'])
@@ -2323,7 +2323,7 @@ case 'POSHeaders':
                                                                                                 'data'=>$retrieved
                                                                                             ];
                                                                                             break;
-                                                                                            case 'VPromo':
+                                                                                            case 'vpromo':
                                                                                                 $response = DB::connection('aceHODB')
                                                                                                 ->table('VPromo')
                                                                                                 ->where('PROMOID', $item['COLUMN1'])
@@ -2351,7 +2351,7 @@ case 'POSHeaders':
                                                                                                     'data'=>$retrieved
                                                                                                 ];
                                                                                                 break;
-                                                                                                case 'WalletTrans':
+                                                                                                case 'wallettrans':
                                                                                                     $response = DB::connection('aceHODB')
                                                                                                     ->table('WalletTrans')
                                                                                                     ->where('BRANCHID', $item['COLUMN1'])
@@ -2381,7 +2381,7 @@ case 'POSHeaders':
                                                                                                         'data'=>$retrieved
                                                                                                     ];
                                                                                                     break;
-                                                                                                    case 'Zones':
+                                                                                                    case 'zones':
                                                                                                         $response = DB::connection('aceHODB')
                                                                                                         ->table('Zones')
                                                                                                         ->where('ZONEID', $item['COLUMN1'])
