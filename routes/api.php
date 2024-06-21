@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\transactionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,5 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/syncServer',[transactionController::class, 'sendToServer']);
 Route::post('/syncSiteDB',[transactionController::class, 'sendToSiteDB']);
 Route::get('/syncTable/{date}/{time}',[transactionController::class, 'syncTable']);
+Route::post('/test', [Controller::class ,'test']);
 
 
