@@ -152,9 +152,10 @@
             $authHeader = 'Basic ' . base64_encode($username . ':' . $password); 
 
             if($request->header('Authorization','default') == $authHeader){
-                $data = syncTable::where('date','>=',$date)
-                ->where('time','>=',$time)
+                $data = syncTable::where('date','>',$date)
+                ->orWhere('DATE','=',$date ,'&&','TIME','>',$time)
                 ->get();
+                
                 $res=[];
                 foreach($data as $item){
                     try{
@@ -1295,6 +1296,7 @@
                             if($response ==="[]" || Empty($response) || $response->isEmpty()){
                                 break;
                             }
+
                             foreach($response as $row){
                                 foreach($row as $key => $value){
                                     $retrieved[]=[
@@ -1311,6 +1313,34 @@
                                 'data'=>$retrieved
                             ];
                             break;
+                            case 'mop':
+                                $response = DB::connection('aceHODB')
+                                ->table('mop')
+                                ->where('id', $item['COLUMN1'])
+                                ->get();
+    
+                                $retrieved = [];
+    
+                                if($response ==="[]" || Empty($response) || $response->isEmpty()){
+                                    break;
+                                }
+                                
+                                foreach($response as $row){
+                                    foreach($row as $key => $value){
+                                        $retrieved[]=[
+                                            'column'=>$key,
+                                            'value'=>$value
+                                        ];
+                                    }
+                                }
+    
+                                $res[]=[
+                                    'statusCode'=>200,
+                                    'table'=>'ManualOS',
+                                    'message'=>'success',
+                                    'data'=>$retrieved
+                                ];
+                                break;
                             case 'master':
                             $response = DB::connection('aceHODB')
                             ->table('Master')
