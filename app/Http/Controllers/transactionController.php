@@ -1336,7 +1336,7 @@
     
                                 $res[]=[
                                     'statusCode'=>200,
-                                    'table'=>'ManualOS',
+                                    'table'=>'mop',
                                     'message'=>'success',
                                     'data'=>$retrieved
                                 ];
