@@ -129,10 +129,10 @@
                     }
                     catch(\Illuminate\Database\QueryException $exception){
 
-                        $res[] = ['StatusCode'=>'500', 
-                        'Message'=>'Failed', 
-                        'error'=>$exception->getMessage(), 
-                        'Data'=>  $conditions]; 
+                        $res[] = ['StatusCode'=>'500',
+                        'Message'=>'Failed',
+                        'error'=>$exception->getMessage(),
+                        'Data'=>  $conditions];
 
                     }
                 }
@@ -159,8 +159,6 @@
                 $res=[];
                 foreach($data as $item){
                     try{
-
-
                         switch (strtolower($item['TABLENAME'])) {
                             case 'partslocation':
                             $response = DB::connection('aceHODB')->table('PartsLocation')->where('BRANCHID',$item['COLUMN1'])
@@ -177,12 +175,10 @@
                             }
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'PARTSLOCATION',
                                 'message'=>'success',
                                 'data'=>$retrieved
                             ];
-                            
                             break;
                             case 'plu':
                             $response = DB::connection('aceHODB')->table('PLU')->where('PLUBARCODE',$item['COLUMN1'])
@@ -200,7 +196,6 @@
                             }
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'PLU',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -221,7 +216,6 @@
                             }
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'PARTS',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -248,7 +242,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'POSTMIX',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -274,7 +267,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'ADJUSTMENTRATE',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -301,7 +293,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'AdjustmentRateDtls',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -327,7 +318,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'AdmissionType',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -359,7 +349,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'AGTS',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -385,7 +374,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'AssetsDetails',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -413,7 +401,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'ATC',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -444,7 +431,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'AthleteCustomers',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -472,7 +458,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'BOPromo',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -500,7 +485,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'Branches',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -528,7 +512,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'BusUnit',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -556,7 +539,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'CATEGORYCODE',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -585,7 +567,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'ChequeDetails',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -614,7 +595,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'ClaimPromo',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -642,7 +622,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'Company',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -670,7 +649,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'Currencies',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -698,7 +676,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'CurrencyDenomination',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -726,7 +703,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'CurrencyExchangeRate',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -754,7 +730,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'CustomerLoyaltyCards',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -784,7 +759,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'Customers',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -812,7 +786,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'CustomersBank',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -840,7 +813,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'Custprice',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -868,7 +840,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'CustpriceHistory',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -897,7 +868,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'DeptSumm',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -925,7 +895,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'DeviceList',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -956,7 +925,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'DiscTrans',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -984,7 +952,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'Divisions',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -1012,7 +979,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'Employee',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -1040,7 +1006,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'ExemptProducts',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -1068,7 +1033,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'FDefault',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -1096,7 +1060,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'groups',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -1124,7 +1087,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'Holidays',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -1152,7 +1114,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'HOSiteTerminals',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -1180,7 +1141,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'HPromo',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -1209,7 +1169,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'InParkCurrencies',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -1238,7 +1197,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'InParkCurrencyDetails',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -1266,7 +1224,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'LocSettings',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -1294,7 +1251,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'LoyaltySettings',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -1323,7 +1279,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'LoyaltyTrans',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -1353,7 +1308,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'ManualOS',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -1382,7 +1336,6 @@
     
                                 $res[]=[
                                     'statusCode'=>200,
-                                    'action'=>$item['ACTION'],
                                     'table'=>'mop',
                                     'message'=>'success',
                                     'data'=>$retrieved
@@ -1410,7 +1363,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'Master',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -1439,7 +1391,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'MealStubComponents',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -1467,7 +1418,6 @@
 
                                     //     $res[]=[
                                     //         'statusCode'=>200,
-                            // 'action'=>$item['ACTION'],
                                     //         'table'=>'OrderSLipDetails',
                                     //         'message'=>'success',
                                     //         'data'=>$retrieved
@@ -1498,7 +1448,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'OrderSlipHeader',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -1528,7 +1477,6 @@
                             
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'OutletDailySales',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -1557,7 +1505,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'Outlets',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -1585,7 +1532,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'OutletType',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -1613,7 +1559,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'ParkingTickets',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -1642,7 +1587,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'PartSplr',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -1671,7 +1615,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'PartsRequestHeader',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -1700,7 +1643,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'PosAssign',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -1731,7 +1673,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'POSHeaders',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -1760,7 +1701,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'PPCTrans',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -1788,7 +1728,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'PrepaidCards',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -1819,7 +1758,6 @@
 
             //     $res[]=[
             //         'statusCode'=>200,
-                            // 'action'=>$item['ACTION'],
             //         'table'=>'PromoCustomers',
             //         'message'=>'success',
             //         'data'=>$retrieved
@@ -1850,7 +1788,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'PromoItems',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -1878,7 +1815,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'PSetup',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -1909,7 +1845,6 @@
 
                         //     $res[]=[
                         //         'statusCode'=>200,
-                            // 'action'=>$item['ACTION'],
                         //         'table'=>'PTL',
                         //         'message'=>'success',
                         //         'data'=>$retrieved
@@ -1939,7 +1874,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'RedeemOutlets',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -1970,7 +1904,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'SCCustomers',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -1999,7 +1932,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'SiteParts',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -2028,7 +1960,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'Stockcrd',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -2056,7 +1987,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'Subcat',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -2084,7 +2014,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'Supplier',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -2112,7 +2041,6 @@
                             
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'tblProject',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -2140,7 +2068,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'tblReasons',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -2169,7 +2096,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'TenantInventory',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -2197,7 +2123,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'TicketGrouping',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -2226,7 +2151,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'TicketsTemplate',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -2254,7 +2178,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'TicketsTemplateHeader',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -2285,7 +2208,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'TurnoverCurrencyDenomination',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -2316,7 +2238,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'UCostChange',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -2345,7 +2266,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'UserDevices',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -2374,7 +2294,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'Users',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -2402,7 +2321,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'UserSite',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -2430,7 +2348,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'UserType',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -2459,7 +2376,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'VPromo',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -2490,7 +2406,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'WalletTrans',
                                 'message'=>'success',
                                 'data'=>$retrieved
@@ -2518,7 +2433,6 @@
 
                             $res[]=[
                                 'statusCode'=>200,
-                                'action'=>$item['ACTION'],
                                 'table'=>'Zones',
                                 'message'=>'success',
                                 'data'=>$retrieved
