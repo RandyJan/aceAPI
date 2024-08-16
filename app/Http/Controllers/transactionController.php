@@ -8,11 +8,61 @@
     use Illuminate\Validation\Rules\Exists;
     use App\Models\syncTable;
     use Illuminate\Support\Facades\Log;
+    use App\Models\Tickets;
+use Exception;
 
     class transactionController extends Controller
     {
     //
+        public function getTicketData($barcode, Request $request){
+            $username = env('USER_NAME');
+            $password = env('PASSWORD');
+            $authHeader = 'Basic ' . base64_encode($username . ':' . $password); 
+            
+            if($request->header('Authorization','default') == $authHeader){
+                $result = Tickets::where("BARCODE",$barcode)->get();
+                $res=[];
+                json_encode($result);
+                $retrieved = [];
+                try{
+                    if($result->isNotEmpty()){
+                        foreach($result as $item){
+                            foreach($item->getAttributes() as $key=> $value){
+                                $retrieved[]=["column"=>$key,
+                                                "value"=>$value];
+                            }
+                                
+                        }
+                        $res[] = ['StatusCode'=>'200',
+                        'Message'=>'Success',
+                        'Data'=>  $retrieved];
+                    }
+                    else{
+                        $res[] = ['StatusCode'=>'404',
+                        'Message'=>'Not Found',
+                        'Data'=>[ "Barcode"=>$barcode]];
+                    }
+                   
+                    
+                  
+                }
+                catch(Exception $exception){
+                    $res[] = ['StatusCode'=>'500',
+                        'Message'=>'Failed',
+                        'Error'=>$exception->getMessage(),
+                        'Data'=> $retrieved];
+                }
+                return response()->json( $res,200);
 
+            }
+            else{
+                return response()->json([
+                    'StatusCode'=>'401',
+                    'Message'=>'Unauthorized',
+
+                ],401);
+            }
+        }
         public function sendToServer(Request $request){
             $username = env('USER_NAME');
             $password = env('PASSWORD');

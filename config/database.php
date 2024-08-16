@@ -93,7 +93,7 @@ return [
         'aceHODB' => [
             'driver' => 'sqlsrv',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB2_HOST', 'localhost'),
+            'host' => env('DB2_HOST', 'localhost/MSSQLSERVER22'),
             'port' => env('DB2_PORT', '1433'),
             'database' => env('DB2_DATABASE', 'forge'),
             'username' => env('DB2_USERNAME', 'forge'),
