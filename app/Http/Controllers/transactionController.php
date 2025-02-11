@@ -3,7 +3,8 @@
     namespace App\Http\Controllers;
 
     use App\Models\transactionHeader;
-    use Illuminate\Http\Request;
+    use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
     use DB;
     use Illuminate\Validation\Rules\Exists;
     use App\Models\syncTable;
@@ -50,7 +51,15 @@ use Exception;
                     $res[] = ['StatusCode'=>'500',
                         'Message'=>'Failed',
                         'Error'=>$exception->getMessage(),
+                        'ErrorCode'=>$exception->getCode(),
                         'Data'=> $retrieved];
+                }
+                catch(QueryException $e){
+                    $res[] = ['StatusCode'=>'500',
+                    'Message'=>'Failed',
+                    'Error'=>$e->getMessage(),
+                    'ErrorCode'=>$e->getCode(),
+                    'Data'=> $retrieved];
                 }
                 return response()->json( $res,200);
 
@@ -117,6 +126,7 @@ use Exception;
                         $res[] = ['StatusCode'=>'500',
                         'Message'=>'Failed',
                         'Error'=>$exception->getMessage(),
+                        'ErrorCode'=>$exception->getCode(),
                         'Data'=> $conditions];
                     }
                 }
@@ -181,7 +191,8 @@ use Exception;
 
                         $res[] = ['StatusCode'=>'500', 
                         'Message'=>'Failed', 
-                        'error'=>$exception->getMessage(), 
+                        'ErrorCode'=>$exception->getCode(),
+                        'Error'=>$exception->getMessage(), 
                         'Data'=>  $conditions]; 
 
                     }
@@ -2614,6 +2625,7 @@ use Exception;
                         $res[]=[
                             'statusCode'=>404,
                             'message'=>'unknown data',
+                            'ErrorCode'=>$exception->getCode(),
                             'data'=>[$exception]
                         ];
                     }
